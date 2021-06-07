@@ -21,6 +21,10 @@ namespace Operátorok
             //var enumValue = (Expression.Operators)Expression.GetEnumFromDescription("+", typeof(Expression.Operators));
             //Console.WriteLine(enumValue);
 
+            //2.
+            //TODO: Miért kevesebb egyel?
+            Console.WriteLine($"2. feladat: Kifejezések száma: {expressions.Count}");
+
             Console.ReadKey();
         }
     }
