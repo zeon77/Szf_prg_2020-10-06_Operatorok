@@ -27,7 +27,13 @@ namespace Operátorok
             string[] s = line.Split(' ');
             OperandA = int.Parse(s[0]);
             OperandB = int.Parse(s[2]);
-            Operator = (Operators) Enum.Parse(typeof(Operators), s[1], true);
+
+            var type = Operator.GetType();
+            var memInfo = type.GetMember(Operators.addition.ToString());
+            var attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+            var description = ((DescriptionAttribute)attributes[0]).Description;
+
+            Operator = (Operators) Enum.Parse(typeof(Operators), description, true);
         }
     }
 }
