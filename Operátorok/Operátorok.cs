@@ -15,7 +15,11 @@ namespace Operátorok
             foreach (var line in File.ReadAllLines("kifejezesek.txt").Skip(1))
                 expressions.Add(new Expression(line));
 
-
+            //Enum Description-ok kezelése
+            //string desc = Expression.GetDescriptionFromEnumValue(Expression.Operators.addition);
+            //Console.WriteLine(desc);
+            //var enumValue = (Expression.Operators)Expression.GetEnumFromDescription("+", typeof(Expression.Operators));
+            //Console.WriteLine(enumValue);
 
             Console.ReadKey();
         }
