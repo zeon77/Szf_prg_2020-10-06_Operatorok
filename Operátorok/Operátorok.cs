@@ -12,7 +12,7 @@ namespace Operátorok
         {
             //1.
             List<Expression> expressions = new List<Expression>();
-            foreach (var line in File.ReadAllLines("kifejezesek.txt").Skip(1))
+            foreach (var line in File.ReadAllLines("kifejezesek.txt"))
                 expressions.Add(new Expression(line));
 
             //Enum Description-ok kezelése
@@ -22,8 +22,11 @@ namespace Operátorok
             //Console.WriteLine(enumValue);
 
             //2.
-            //TODO: Miért kevesebb egyel?
             Console.WriteLine($"2. feladat: Kifejezések száma: {expressions.Count}");
+
+            //3.
+            var mod = expressions.Where(x => x.Operator == Expression.Operators.mod).Count();
+            Console.WriteLine($"3. feladat: Kifejezések maradékos osztással: {mod}");
 
             Console.ReadKey();
         }
