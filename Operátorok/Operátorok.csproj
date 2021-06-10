@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Munkafüzet1.xlsx" />
     <None Include="Szf_prg_2020-10-06_Operátorok.pdf" />
   </ItemGroup>
   <ItemGroup>

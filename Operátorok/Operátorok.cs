@@ -28,6 +28,9 @@ namespace Operátorok
             var mod = expressions.Where(x => x.Operator == Expression.Operators.mod).Count();
             Console.WriteLine($"3. feladat: Kifejezések maradékos osztással: {mod}");
 
+            //4.
+            Console.WriteLine($"4. feladat: {(expressions.Any(x => x.OperandA % 10 == 0 && x.OperandB % 10 == 0) ? "Van" : "Nincs")} ilyen kifejezés.");
+
             Console.ReadKey();
         }
     }
