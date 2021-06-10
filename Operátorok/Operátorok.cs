@@ -31,6 +31,12 @@ namespace Operátorok
             //4.
             Console.WriteLine($"4. feladat: {(expressions.Any(x => x.OperandA % 10 == 0 && x.OperandB % 10 == 0) ? "Van" : "Nincs")} ilyen kifejezés.");
 
+            //5.
+            Console.WriteLine($"5. feladat: Statisztika");
+            expressions.GroupBy(x => x.Operator)
+                .Select(gr => new { Operator = gr.Key, Count = gr.Count() }).ToList()
+                .ForEach(x => Console.WriteLine($"\t{Expression.GetDescriptionFromEnumValue(x.Operator),3} -> {x.Count} db"));
+
             Console.ReadKey();
         }
     }
