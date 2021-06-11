@@ -44,6 +44,12 @@ namespace Operátorok
                 ex = Console.ReadLine();
             }
 
+            //8.
+            Console.WriteLine($"8. feladat: eredemenyek.txt");
+            List<string> lines = new List<string>();
+            expressions.ForEach(x => lines.Add($"{x.ToString()} = {x.Evaluate()}"));
+            File.WriteAllLines("eredmenyek.txt", lines);
+
             Console.ReadKey();
         }
     }
