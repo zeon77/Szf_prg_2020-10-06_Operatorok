@@ -9,52 +9,56 @@ namespace Operátorok
 {
     class Expression
     {
-        public enum Operators
+        //Static
+        private static List<string> ValidOperators = new List<string>
         {
-            [Description("+")] addition,
-            [Description("-")] subtraction,
-            [Description("*")] multiplication,
-            [Description("/")] division,
-            [Description("mod")] mod,
-            [Description("div")] div
-        }
+            "+", "-", "/", "mod", "div"
+        };
+
+        //Properties
+        public bool isValidOperator { get => ValidOperators.Contains(Operator); }
+
         public int OperandA { get; set; }
         public int OperandB { get; set; }
-        public Operators Operator { get; set; }
+        public string Operator { get; set; }
 
+        //Constructors
         public Expression(string line)
         {
             string[] s = line.Split(' ');
             OperandA = int.Parse(s[0]);
-            Operator = (Operators)GetEnumFromDescription(s[1], typeof(Operators));
+            Operator = s[1];
             OperandB = int.Parse(s[2]);
         }
-
-        //Enum kezelő metódusok, külön osztályban lenne a helyük...
-        public static string GetDescriptionFromEnumValue(Enum value)
+       
+        //Methods
+        //6.
+        public string Evaluate()
         {
-            FieldInfo field = value.GetType().GetField(value.ToString());
-
-            DescriptionAttribute attribute =
-                Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
-
-            return attribute == null ? value.ToString() : attribute.Description;
-        }
-        public static int GetEnumFromDescription(string description, Type enumType)
-        {
-            foreach (var field in enumType.GetFields())
+            try
             {
-                DescriptionAttribute attribute
-                    = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
-                if (attribute == null)
-                    continue;
-                if (attribute.Description == description)
+                double result;
+                switch (Operator)
                 {
-                    return (int)field.GetValue(null);
+                    case "+": result = OperandA + OperandB; break;
+                    case "-": result = OperandA - OperandB; break;
+                    case "*": result = OperandA * OperandB; break;
+                    case "/": result = (double)OperandA / OperandB; break;
+                    case "div": result = OperandA / OperandB; break;
+                    case "mod": result = OperandA % OperandB; break;
+                    default: return "Hibás operátor!";
                 }
+                return result.ToString("0.###");
             }
-            return 0;
+            catch (Exception)
+            {
+                return "Egyéb hiba";
+            }
         }
 
+        public override string ToString()
+        {
+            return OperandA + " " + Operator + " " + OperandB;
+        }
     }
 }

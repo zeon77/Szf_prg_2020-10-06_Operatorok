@@ -15,17 +15,11 @@ namespace Operátorok
             foreach (var line in File.ReadAllLines("kifejezesek.txt"))
                 expressions.Add(new Expression(line));
 
-            //Enum Description-ok kezelése
-            //string desc = Expression.GetDescriptionFromEnumValue(Expression.Operators.addition);
-            //Console.WriteLine(desc);
-            //var enumValue = (Expression.Operators)Expression.GetEnumFromDescription("+", typeof(Expression.Operators));
-            //Console.WriteLine(enumValue);
-
             //2.
             Console.WriteLine($"2. feladat: Kifejezések száma: {expressions.Count}");
 
             //3.
-            var mod = expressions.Where(x => x.Operator == Expression.Operators.mod).Count();
+            var mod = expressions.Where(x => x.Operator == "mod").Count();
             Console.WriteLine($"3. feladat: Kifejezések maradékos osztással: {mod}");
 
             //4.
@@ -33,9 +27,22 @@ namespace Operátorok
 
             //5.
             Console.WriteLine($"5. feladat: Statisztika");
-            expressions.GroupBy(x => x.Operator)
+            expressions
+                .Where(x => x.isValidOperator)
+                .GroupBy(x => x.Operator)
                 .Select(gr => new { Operator = gr.Key, Count = gr.Count() }).ToList()
-                .ForEach(x => Console.WriteLine($"\t{Expression.GetDescriptionFromEnumValue(x.Operator),3} -> {x.Count} db"));
+                .ForEach(x => Console.WriteLine($"\t{x.Operator,3} -> {x.Count} db"));
+
+            //7.
+            Console.Write($"7. feladat: Kérek egy kifejezést (pl.: 1 + 1): ");
+            string ex = Console.ReadLine();
+            while (ex != "vége")
+            {
+                Expression e = new Expression(ex);
+                Console.WriteLine($"\t{e.ToString()} = {e.Evaluate()}");
+                Console.Write($"7. feladat: Kérek egy kifejezést (pl.: 1 + 1): ");
+                ex = Console.ReadLine();
+            }
 
             Console.ReadKey();
         }
